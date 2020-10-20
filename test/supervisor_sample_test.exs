@@ -58,6 +58,8 @@ defmodule SupervisorSampleTest do
     assert_receive {:started, :worker_4}
     assert_receive {:stopped, :worker_5}
     assert_receive {:started, :worker_5}
+    assert_receive {:stopped, :subworker_1}
+    assert_receive {:started, :subworker_1}
 
     Worker.stop(:worker_4)
 
@@ -67,6 +69,8 @@ defmodule SupervisorSampleTest do
     assert_receive {:started, :worker_4}
     assert_receive {:stopped, :worker_5}
     assert_receive {:started, :worker_5}
+    assert_receive {:stopped, :subworker_1}
+    assert_receive {:started, :subworker_1}
 
     Worker.stop(:worker_5)
 
@@ -76,6 +80,8 @@ defmodule SupervisorSampleTest do
     refute_received {:started, :worker_4}
     assert_receive {:stopped, :worker_5}
     assert_receive {:started, :worker_5}
+    assert_receive {:stopped, :subworker_1}
+    assert_receive {:started, :subworker_1}
   end
 
   test "strategy one-for-all, restart any worker, all restart" do

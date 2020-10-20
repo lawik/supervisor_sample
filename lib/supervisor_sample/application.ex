@@ -22,7 +22,12 @@ defmodule SupervisorSample.Application do
         [
           worker(:worker_3),
           worker(:worker_4),
-          worker(:worker_5)
+          worker(:worker_5),
+          supervisor(
+            :one_for_one,
+            [worker(:subworker_1)],
+            name: :subsupervisor_1
+          )
         ],
         name: :supervisor_2
       ),
